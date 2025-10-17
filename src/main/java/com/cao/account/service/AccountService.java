@@ -1,17 +1,16 @@
 package com.cao.account.service;
 
 import com.cao.account.dto.AccountResponse;
-import com.cao.account.entities.Account;
-
-import java.util.List;
+import com.cao.account.dto.AddAccountRequest;
 
 public interface AccountService {
 
-    List<Account> getAllAccounts();
+    AccountResponse getAllAccounts(String userId);
 
-    AccountResponse getAllSavingsAccounts(String username);
+    AccountResponse getAllSavingsAccounts(String userId);
 
-    List<Account> getAllCheckingsAccounts();
+    AccountResponse getAllCheckingsAccounts(String userId);
 
+    AccountResponse addAccounts(AddAccountRequest request);
 }
 

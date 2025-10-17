@@ -1,13 +1,10 @@
 package com.cao.account.controller;
 
-import com.cao.account.dto.AccountRequest;
 import com.cao.account.dto.AccountResponse;
-import com.cao.account.entities.Account;
+import com.cao.account.dto.AddAccountRequest;
 import com.cao.account.service.AccountService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 
 @RestController
@@ -21,19 +18,24 @@ public class AccountController {
     }
 
     @GetMapping("/accounts")
-    public ResponseEntity<List<Account>> getAllAccounts() {
+    public ResponseEntity<AccountResponse> getAllAccounts(@RequestParam String userId) {
         // TODO change to a customer response entity for customization
-        return ResponseEntity.ok(accountService.getAllAccounts());
+        return ResponseEntity.ok(accountService.getAllAccounts(userId));
     }
 
-    @PostMapping("/savings")
-    public ResponseEntity<AccountResponse> getAllSavingsAccounts(@RequestBody AccountRequest request) {
+    @GetMapping("/accounts/{userId}/savings")
+    public ResponseEntity<AccountResponse> getAllSavingsAccounts(@PathVariable String userId) {
         // TODO change to a customer response entity for customization
-        return ResponseEntity.ok(accountService.getAllSavingsAccounts(request.getUsername()));
+        return ResponseEntity.ok(accountService.getAllSavingsAccounts(userId));
     }
 
-    @GetMapping("/checking")
-    public String getCheckingAccounts() {
-        return "";
+    @GetMapping("/accounts/{userId}/checking")
+    public ResponseEntity<AccountResponse> getCheckingAccounts(@PathVariable String userId) {
+        return ResponseEntity.ok(accountService.getAllCheckingsAccounts(userId));
+    }
+
+    @PostMapping("/accounts")
+    public void addAccounts(@RequestBody AddAccountRequest request) {
+
     }
 }

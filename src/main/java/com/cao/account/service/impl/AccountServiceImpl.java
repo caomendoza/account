@@ -1,6 +1,7 @@
 package com.cao.account.service.impl;
 
 import com.cao.account.dto.AccountResponse;
+import com.cao.account.dto.AddAccountRequest;
 import com.cao.account.entities.Account;
 import com.cao.account.repository.AccountRepository;
 import com.cao.account.service.AccountService;
@@ -20,26 +21,43 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public List<Account> getAllAccounts() {
-        return null;
+    public AccountResponse getAllAccounts(String userId) {
+        List<Account> accounts = accountRepository.findByUserId(userId);
+        AccountResponse response = new AccountResponse();
+        response.setAccounts(accounts);
+        return response;
     }
 
     @Override
     public AccountResponse getAllSavingsAccounts(String userId) {
         List<Account> accounts = accountRepository.findByUserId(userId);
-        List<Account> sortedSavingsAccount = accounts.stream()
-                .filter(a -> "SA".equals(a.getAccountType()))
+        List<Account> sortedAccounts = accounts.stream()
+                .filter(a -> "SA".equals(a.getAccountType()) && "ACTIVE".equals(a.getStatus()))
                 .sorted(Comparator.comparing(Account::getAccountNumber))
                 .collect(Collectors.toList());
 
         // TODO can change to model mapper
         AccountResponse response = new AccountResponse();
-        response.setAccounts(sortedSavingsAccount);
+        response.setAccounts(sortedAccounts);
         return response;
     }
 
     @Override
-    public List<Account> getAllCheckingsAccounts() {
-        return List.of();
+    public AccountResponse getAllCheckingsAccounts(String userId) {
+        List<Account> accounts = accountRepository.findByUserId(userId);
+        List<Account> sortedAccounts = accounts.stream()
+                .filter(a -> "CA".equals(a.getAccountType()) && "ACTIVE".equals(a.getStatus()))
+                .sorted(Comparator.comparing(Account::getAccountNumber))
+                .collect(Collectors.toList());
+
+        // TODO can change to model mapper
+        AccountResponse response = new AccountResponse();
+        response.setAccounts(sortedAccounts);
+        return response;
+    }
+
+    @Override
+    public AccountResponse addAccounts(AddAccountRequest request) {
+        return null;
     }
 }
