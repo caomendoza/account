@@ -1,27 +1,45 @@
-# Account Service
+# 🔐 Auth Microservice — Spring OAuth2Authorization Server
 
-This microservice manages user accounts in a secure, scalable banking system. It exposes RESTful endpoints for retrieving and managing account data, and integrates with Spring Security to enforce JWT-based access control.
+⚠️ **Status: In Progress**
+> This project is currently under development. Hopefully I can finish it soon :)
 
-## 🔐 Features
+## 🎯 Project Intent
 
-- REST API for account data (GET, POST, etc.)
-- JWT authentication via Spring Resource Server
-- Scope-based access control (`SCOPE_read`, `SCOPE_write`)
-- Realistic account modeling with lifecycle states
-- Currency and account type support (`PHP`, `USD`, `CA`, `SA`)
-- Primary account flag for business logic
-- Seed data for testing and simulation
+The intent of this microservice is to **abstract the authentication and authorization layer** for applications. By centralizing token issuance, client registration, and public key exposure, it allows downstream services to delegate security concerns and focus on business logic.
 
-## 🚀 Getting Started
+This service acts as a dedicated OAuth2 Authorization Server, issuing JWT access tokens and exposing a JWKS endpoint for resource servers to validate signatures. It is designed to be modular, standards-compliant, and extensible for enterprise-grade identity flows.
+
+## 🚀 Features
+
+- OAuth2 Authorization Server using `spring-boot-starter-oauth2-authorization-server`
+- Supports `client_credentials` grant type
+- JWT access tokens signed with RSA private key
+- Custom token claims (`scope`, `issuer`)
+- JWKS endpoint at `/.well-known/jwks.json`
+- In-memory registered clients
+- RSA key configuration via `application.yml` or environment variables
+
+---
+
+## 🧱 Tech Stack
+
+- Java 17
+- Spring Boot 3.5.6
+- Spring Authorization Server
+- Nimbus JOSE + JWT
+- H2 (runtime only)
+- Maven
+
+## 🛠️ Getting Started
 
 ### Prerequisites
 
 - Java 17+
-- Maven or Gradle
-- Spring Boot 3.x
-- Running Auth Service with JWKS endpoint
+- Maven 3.8+
+- RSA key pair (public/private)
 
-### Run the service
+### 1. Clone the project
 
 ```bash
-./mvnw spring-boot:run
+git clone https://github.com/your-org/auth-service.git
+cd auth-service
