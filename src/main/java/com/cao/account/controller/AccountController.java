@@ -17,7 +17,7 @@ public class AccountController {
         this.accountService = accountService;
     }
 
-    @GetMapping("/accounts")
+    @GetMapping("/accounts/{userId}")
     public ResponseEntity<AccountResponse> getAllAccounts(@RequestParam String userId) {
         // TODO change to a customer response entity for customization
         return ResponseEntity.ok(accountService.getAllAccounts(userId));
