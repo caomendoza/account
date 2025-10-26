@@ -1,21 +1,17 @@
-package com.cao.account.entities;
+package com.cao.account.kafka;
 
-
-import jakarta.persistence.*;
-import lombok.Builder;
 import lombok.Data;
 
 import java.math.BigDecimal;
 
 @Data
-@Builder
-@Entity
-@Table(name = "account")
-public class Account {
+public class AccountCreatedEventDto {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int accountId;
+    private String eventId;
+    private String timestamp;
+    private String source;
+    private String eventType;
+
     private String userId;
     private String accountName;
     private int accountNumber;
@@ -24,6 +20,5 @@ public class Account {
     private BigDecimal balance;
     private String currency;
     private String status;
-
 
 }

@@ -1,9 +1,8 @@
 package com.cao.account.service;
 
 import com.cao.account.dto.AccountResponse;
-import com.cao.account.dto.AddAccountRequest;
-
-import javax.security.auth.login.AccountNotFoundException;
+import com.cao.account.dto.AddAccountResponse;
+import com.cao.account.entities.Account;
 
 public interface AccountService {
 
@@ -13,6 +12,6 @@ public interface AccountService {
 
     AccountResponse getAllCheckingsAccounts(String userId);
 
-    AccountResponse addAccounts(AddAccountRequest request);
+    AddAccountResponse addAccount(Account account);
 }
 

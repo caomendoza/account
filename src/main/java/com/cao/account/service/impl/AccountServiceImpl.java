@@ -1,7 +1,7 @@
 package com.cao.account.service.impl;
 
 import com.cao.account.dto.AccountResponse;
-import com.cao.account.dto.AddAccountRequest;
+import com.cao.account.dto.AddAccountResponse;
 import com.cao.account.entities.Account;
 import com.cao.account.exception.AccountNotFoundException;
 import com.cao.account.repository.AccountRepository;
@@ -29,7 +29,6 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public AccountResponse getAllAccounts(String userId) {
-
         List<Account> accounts = accountRepository.findByUserId(userId);
         if (accounts.isEmpty()) {
             log.info("Account not found with userId {}", userId);
@@ -75,7 +74,9 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public AccountResponse addAccounts(AddAccountRequest request) {
-        return null;
+    public AddAccountResponse addAccount(Account account) {
+        Account saved = accountRepository.save(account);
+        return new AddAccountResponse(saved);
     }
+
 }

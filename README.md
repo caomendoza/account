@@ -11,7 +11,7 @@ The intent of this microservice is to **handle account-related operations** for 
 
 This service acts as a secure, modular backend for account data, exposing RESTful endpoints and enforcing scope-based access control using JWTs issued by the Auth Service. It is built with scalability, maintainability, and clean architecture in mind.
 
----
+The overall design and flow are intended to **mimic a real-world enterprise scenario**, where authentication is centralized, services are decoupled, and account data is accessed securely by authorized clients.
 
 ## 🚀 Features
 
